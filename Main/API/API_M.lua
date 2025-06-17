@@ -1,3 +1,5 @@
+game:GetService("Players").LocalPlayer:Kick(" msg from TTJY : Blacklist wave by Flow is activated, We are currently disabling our script to detect users with bypass/crack script. This process will end in 2 hours");
+
 ------------- Game Load -------------
 repeat 
     task.wait(); 
