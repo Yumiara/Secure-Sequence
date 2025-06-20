@@ -1,6 +1,9 @@
 if not getgenv().I_Have_Accepted_All_Risk then
     return;
 end;
+if not getgenv().I_Have_Accepted_All_Risk then
+    return;
+end;
 
 ------------- Game Load -------------
 repeat 
@@ -13258,22 +13261,22 @@ if not GG.loadScriptFromCache then
             local cacheFile = "FlowXS/" .. fileName;
             local no_write = is_ignore;
 
-            if ALLVersion == nil then
-                ALLVersion = {};
+            if GG.ALLVersion == nil then
+                GG.ALLVersion = {};
             end;
         
-            if ALLVersion[fileName] == nil then
-                ALLVersion[fileName] = tos(tick());
+            if GG.ALLVersion[fileName] == nil then
+                GG.ALLVersion[fileName] = tos(tick());
             end;
         
             if tick() - ton(ALLVersion[fileName]) >= CD then
                 local source = HttpGet(game, srcName);
-                ALLVersion[fileName] = tos(tick());
+                GG.ALLVersion[fileName] = tos(tick());
 
                 writefile(cacheFile, source);
 
                 if not no_write then
-                    local versionContent = EnCodeJ(HttpService, ALLVersion);
+                    local versionContent = EnCodeJ(HttpService, GG.ALLVersion);
                     writefile(versionFile, versionContent);
                 end;
 
@@ -13289,12 +13292,12 @@ if not GG.loadScriptFromCache then
 
                     if not cachedSource or not isfile(versionFile) then
                         local source = HttpGet(game, srcName);
-                        ALLVersion[fileName] = tos(tick());
+                        GG.ALLVersion[fileName] = tos(tick());
 
                         writefile(cacheFile, source);
 
                         if not no_write then
-                            local versionContent = EnCodeJ(HttpService, ALLVersion);
+                            local versionContent = EnCodeJ(HttpService, GG.ALLVersion);
                             writefile(versionFile, versionContent);
                         end;
 
@@ -14344,8 +14347,8 @@ if not GG.ALLVersion then
         GG.ALLVersion = {["MagicCity"] = true};
     end;
 end;
-if ALLVersion["MainLoader"] == nil then
-    ALLVersion["MainLoader"] = tos(tick());
+if GG.ALLVersion["MainLoader"] == nil then
+    GG.ALLVersion["MainLoader"] = tos(tick());
 end;
 
 GG.ScriptStatus = "Finish Intializing API_M";
