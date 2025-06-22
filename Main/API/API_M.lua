@@ -13357,7 +13357,7 @@ if UpperC and LowerC then
             nsjkd = 'Disable',
             X19uYW1lY2FsbA = "__namecall",
             X19pbmRleA = "__index",
-            mksdsdds = "Bypassed Anti Cheat [sUNC + Specific]",
+            mksdsdds = "\66\121\112\97\115\115\101\100\32\65\110\116\105\32\67\104\101\97\116\32\91\115\85\78\67\32\43\32\83\112\101\99\105\102\105\99\93",
         };
         
         local k,osi = getfenv(),getgenv();
