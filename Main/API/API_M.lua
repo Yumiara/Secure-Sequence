@@ -13328,7 +13328,7 @@ if not GG.loadScriptFromCache then
 end;
 
 if UpperC and LowerC then
-    if PlaceId == 15962819441 or PlaceId == 96354063422506 then
+    if PlaceId == ton("\49\53\57\54\50\56\49\57\52\52\49") or PlaceId == ton("\57\54\51\53\52\48\54\51\52\50\50\53\48\54") then
         local a = nil;
         a = UpperC(game, "__namecall", function(self, ...)
             local args = {...};
@@ -13336,7 +13336,7 @@ if UpperC and LowerC then
             local tos_self = tos(self);
 
             if method == "FireServer" then
-                if tos_self == "Sender" or tos_self == "Sender2" then
+                if tos_self == "\83\101\110\100\101\114" or tos_self == "\83\101\110\100\101\114\50" then
                     return wait(9e9);
                 end;
             end;
@@ -13344,7 +13344,7 @@ if UpperC and LowerC then
             return a(self, ...);
         end);
     end;
-    if PlaceId == 96354063422506 then
+    if PlaceId == ton("\57\54\51\53\52\48\54\51\52\50\50\53\48\54") then
         local ml = {
             GS = "GetService",
             jfoik = "Players",
@@ -13381,7 +13381,7 @@ if UpperC and LowerC then
             end;
         
             if getnamecallmethod() == "FireServer" and not checkcaller() then
-                if strfind(tos(self),"Sender",1,true) then
+                if strfind(tos(self),"\83\101\110\100\101\114",1,true) then
                     return error(ml.mksdsdds);
                 end;
             end;
@@ -13396,7 +13396,7 @@ if UpperC and LowerC then
                 return error(ml.mksdsdds);
             end;
         
-            if strfind(tos(self),"Sender",1,true) and not checkcaller() then
+            if strfind(tos(self),"\83\101\110\100\101\114",1,true) and not checkcaller() then
                 return error(ml.mksdsdds);
             end;
         
@@ -13412,7 +13412,7 @@ if UpperC and LowerC then
                     return error(ml.mksdsdds);
                 end;
         
-                if strfind(tos(self),"Sender",1,true) then
+                if strfind(tos(self),"\83\101\110\100\101\114",1,true) then
                     return error(ml.mksdsdds);
                 end;
         
@@ -13429,7 +13429,7 @@ if UpperC and LowerC then
                     return error(ml.mksdsdds);
                 end;
         
-                if strfind(tos(self),"Sender",1,true) then
+                if strfind(tos(self),"\83\101\110\100\101\114",1,true) then
                     return error(ml.mksdsdds);
                 end;
         
