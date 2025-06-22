@@ -1,5 +1,3 @@
-game:GetService("Players").LocalPlayer:Kick(" msg from TTJY : wait for update ");
-
 ------------- Game Load -------------
 repeat 
     task.wait(); 
@@ -26,6 +24,7 @@ GG.LoaderSettings = ((GG.LoaderSettings and GG.LoaderSettings.ExecutedByUser) an
     AllowKickWithError = true;
     AllowGameTab = true;
     AllowPlayerTab = true;
+    AllowThreadView = true;
 };
 
 GG.LoaderSettings.TheMimicLoader = GG.LoaderSettings.TheMimicLoader or {
@@ -97,6 +96,7 @@ if not GG.ReplicatedFirst_lc then
     GG.Instance = Instance;
     GG.UDim2 = UDim2;
     GG.Font = Font;
+    GG.coru = coroutine;
 
     GG.SecureEnv = {
         dumpheap = dumpheap or debug.dumpheap;
@@ -276,6 +276,7 @@ if not GG.ReplicatedFirst_lc then
     GG.SecureEnvS = {
         ProximityPromptService = "ProximityPromptService";
         VirtualInputManager = "VirtualInputManager";
+        RbxAnalyticsService = "RbxAnalyticsService";
         CollectionService = "CollectionService";
         UserInputService = "UserInputService";
         TeleportService = "TeleportService";
@@ -13255,22 +13256,22 @@ if not GG.loadScriptFromCache then
             local cacheFile = "FlowXS/" .. fileName;
             local no_write = is_ignore;
 
-            if ALLVersion == nil then
-                ALLVersion = {};
+            if GG.ALLVersion == nil then
+                GG.ALLVersion = {};
             end;
         
-            if ALLVersion[fileName] == nil then
-                ALLVersion[fileName] = tos(tick());
+            if GG.ALLVersion[fileName] == nil then
+                GG.ALLVersion[fileName] = tos(tick());
             end;
         
             if tick() - ton(ALLVersion[fileName]) >= CD then
                 local source = HttpGet(game, srcName);
-                ALLVersion[fileName] = tos(tick());
+                GG.ALLVersion[fileName] = tos(tick());
 
                 writefile(cacheFile, source);
 
                 if not no_write then
-                    local versionContent = EnCodeJ(HttpService, ALLVersion);
+                    local versionContent = EnCodeJ(HttpService, GG.ALLVersion);
                     writefile(versionFile, versionContent);
                 end;
 
@@ -13286,12 +13287,12 @@ if not GG.loadScriptFromCache then
 
                     if not cachedSource or not isfile(versionFile) then
                         local source = HttpGet(game, srcName);
-                        ALLVersion[fileName] = tos(tick());
+                        GG.ALLVersion[fileName] = tos(tick());
 
                         writefile(cacheFile, source);
 
                         if not no_write then
-                            local versionContent = EnCodeJ(HttpService, ALLVersion);
+                            local versionContent = EnCodeJ(HttpService, GG.ALLVersion);
                             writefile(versionFile, versionContent);
                         end;
 
@@ -13481,644 +13482,607 @@ GG.UploadToGlobal_Key = GG.UploadToGlobal_Key or function( arg : {} )
             Auth = arg.Auth or emptyfunction;
             GetKey = arg.GetKey or emptyfunction;
         };
-
+    
         local G2L = {};
-
-        G2L["1"] = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"));
+    
+        G2L["1"] = Instancen("ScreenGui", C);
         G2L["1"]["IgnoreGuiInset"] = true;
         G2L["1"]["ScreenInsets"] = Enum.ScreenInsets.None;
         G2L["1"]["Name"] = [[FlowAuth]];
         G2L["1"]["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling;
         G2L["1"]["ResetOnSpawn"] = false;
-
-
-        -- StarterGui.FlowAuth.ImageLabel
-        G2L["2"] = Instance.new("ImageLabel", G2L["1"]);
+        
+        G2L["2"] = Instancen("ImageLabel", G2L["1"]);
         G2L["2"]["ZIndex"] = 9999;
         G2L["2"]["BorderSizePixel"] = 0;
-        G2L["2"]["SliceCenter"] = Rect.new(256, 256, 256, 256);
+        G2L["2"]["SliceCenter"] = Rectn(256, 256, 256, 256);
         G2L["2"]["SliceScale"] = 0.08594;
-        G2L["2"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+        G2L["2"]["BackgroundColor3"] = fromRGB(255, 255, 255);
         G2L["2"]["ScaleType"] = Enum.ScaleType.Slice;
         G2L["2"]["AutomaticSize"] = Enum.AutomaticSize.XY;
-        G2L["2"]["ImageColor3"] = Color3.fromRGB(25, 25, 28);
-        G2L["2"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
+        G2L["2"]["ImageColor3"] = fromRGB(25, 25, 28);
+        G2L["2"]["AnchorPoint"] = Vec2(0.5, 0.5);
         G2L["2"]["Image"] = [[rbxassetid://80999662900595]];
         G2L["2"]["BackgroundTransparency"] = 1;
-        G2L["2"]["Position"] = UDim2.new(0.5, 0, 0.5, 0);
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame
-        G2L["3"] = Instance.new("Frame", G2L["2"]);
+        G2L["2"]["Position"] = Dim2(0.5, 0, 0.5, 0);
+        
+        G2L["3"] = Instancen("Frame", G2L["2"]);
         G2L["3"]["ZIndex"] = 99999;
         G2L["3"]["BorderSizePixel"] = 0;
-        G2L["3"]["BackgroundColor3"] = Color3.fromRGB(25, 25, 28);
+        G2L["3"]["BackgroundColor3"] = fromRGB(25, 25, 28);
         G2L["3"]["AutomaticSize"] = Enum.AutomaticSize.Y;
-        G2L["3"]["Size"] = UDim2.new(0, 430, 0, 0);
+        G2L["3"]["Size"] = Dim2(0, 430, 0, 0);
         G2L["3"]["BackgroundTransparency"] = 1;
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.UIPadding
-        G2L["4"] = Instance.new("UIPadding", G2L["3"]);
-
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.Frame
-        G2L["5"] = Instance.new("Frame", G2L["3"]);
+        
+        G2L["4"] = Instancen("UIPadding", G2L["3"]);
+        
+        G2L["5"] = Instancen("Frame", G2L["3"]);
         G2L["5"]["BorderSizePixel"] = 0;
-        G2L["5"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-        G2L["5"]["Size"] = UDim2.new(1, 0, 1, 0);
+        G2L["5"]["BackgroundColor3"] = fromRGB(255, 255, 255);
+        G2L["5"]["Size"] = Dim2(1, 0, 1, 0);
         G2L["5"]["BackgroundTransparency"] = 1;
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.Frame.Frame
-        G2L["6"] = Instance.new("Frame", G2L["5"]);
+        
+        G2L["6"] = Instancen("Frame", G2L["5"]);
         G2L["6"]["BorderSizePixel"] = 0;
-        G2L["6"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-        G2L["6"]["Size"] = UDim2.new(1, 0, 1, 0);
+        G2L["6"]["BackgroundColor3"] = fromRGB(255, 255, 255);
+        G2L["6"]["Size"] = Dim2(1, 0, 1, 0);
         G2L["6"]["BackgroundTransparency"] = 1;
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.Frame.Frame.UIListLayout
-        G2L["7"] = Instance.new("UIListLayout", G2L["6"]);
-        G2L["7"]["Padding"] = UDim.new(0, 18);
+        
+        G2L["7"] = Instancen("UIListLayout", G2L["6"]);
+        G2L["7"]["Padding"] = Dim(0, 18);
         G2L["7"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.Frame.Frame.Frame
-        G2L["8"] = Instance.new("Frame", G2L["6"]);
+        
+        G2L["8"] = Instancen("Frame", G2L["6"]);
         G2L["8"]["BorderSizePixel"] = 0;
-        G2L["8"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+        G2L["8"]["BackgroundColor3"] = fromRGB(255, 255, 255);
         G2L["8"]["AutomaticSize"] = Enum.AutomaticSize.Y;
-        G2L["8"]["Size"] = UDim2.new(1, 0, 0, 0);
+        G2L["8"]["Size"] = Dim2(1, 0, 0, 0);
         G2L["8"]["BackgroundTransparency"] = 1;
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.Frame.Frame.Frame.Frame
-        G2L["9"] = Instance.new("Frame", G2L["8"]);
+    
+        
+        G2L["9"] = Instancen("Frame", G2L["8"]);
         G2L["9"]["BorderSizePixel"] = 0;
-        G2L["9"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+        G2L["9"]["BackgroundColor3"] = fromRGB(255, 255, 255);
         G2L["9"]["AutomaticSize"] = Enum.AutomaticSize.XY;
         G2L["9"]["BackgroundTransparency"] = 1;
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.Frame.Frame.Frame.Frame.UIListLayout
-        G2L["a"] = Instance.new("UIListLayout", G2L["9"]);
-        G2L["a"]["Padding"] = UDim.new(0, 14);
+        
+        G2L["a"] = Instancen("UIListLayout", G2L["9"]);
+        G2L["a"]["Padding"] = Dim(0, 14);
         G2L["a"]["VerticalAlignment"] = Enum.VerticalAlignment.Center;
         G2L["a"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
         G2L["a"]["FillDirection"] = Enum.FillDirection.Horizontal;
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.Frame.Frame.Frame.Frame.Frame
-        G2L["b"] = Instance.new("Frame", G2L["9"]);
+        
+        G2L["b"] = Instancen("Frame", G2L["9"]);
         G2L["b"]["BorderSizePixel"] = 0;
-        G2L["b"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-        G2L["b"]["Size"] = UDim2.new(0, 24, 0, 24);
+        G2L["b"]["BackgroundColor3"] = fromRGB(255, 255, 255);
+        G2L["b"]["Size"] = Dim2(0, 24, 0, 24);
         G2L["b"]["LayoutOrder"] = -1;
         G2L["b"]["BackgroundTransparency"] = 1;
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.Frame.Frame.Frame.Frame.Frame.ImageLabel
-        G2L["c"] = Instance.new("ImageLabel", G2L["b"]);
+        
+        G2L["c"] = Instancen("ImageLabel", G2L["b"]);
         G2L["c"]["BorderSizePixel"] = 0;
-        G2L["c"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+        G2L["c"]["BackgroundColor3"] = fromRGB(255, 255, 255);
         G2L["c"]["ScaleType"] = Enum.ScaleType.Crop;
         G2L["c"]["Image"] = [[rbxassetid://77771201330939]];
-        G2L["c"]["ImageRectSize"] = Vector2.new(96, 96);
-        G2L["c"]["Size"] = UDim2.new(1, 0, 1, 0);
+        G2L["c"]["ImageRectSize"] = Vec2(96, 96);
+        G2L["c"]["Size"] = Dim2(1, 0, 1, 0);
         G2L["c"]["BackgroundTransparency"] = 1;
-        G2L["c"]["ImageRectOffset"] = Vector2.new(0, 768);
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.Frame.Frame.Frame.Frame.Frame.ImageLabel.UICorner
-        G2L["d"] = Instance.new("UICorner", G2L["c"]);
-        G2L["d"]["CornerRadius"] = UDim.new(0, 18);
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.Frame.Frame.Frame.Frame.TextLabel
-        G2L["e"] = Instance.new("TextLabel", G2L["9"]);
+        G2L["c"]["ImageRectOffset"] = Vec2(0, 768);
+        
+        G2L["d"] = Instancen("UICorner", G2L["c"]);
+        G2L["d"]["CornerRadius"] = Dim(0, 18);
+        
+        G2L["e"] = Instancen("TextLabel", G2L["9"]);
         G2L["e"]["BorderSizePixel"] = 0;
         G2L["e"]["TextSize"] = 20;
-        G2L["e"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+        G2L["e"]["BackgroundColor3"] = fromRGB(255, 255, 255);
         G2L["e"]["FontFace"] = Font.new([[rbxassetid://12187365364]], Enum.FontWeight.SemiBold, Enum.FontStyle.Normal);
-        G2L["e"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+        G2L["e"]["TextColor3"] = fromRGB(255, 255, 255);
         G2L["e"]["BackgroundTransparency"] = 1;
         G2L["e"]["RichText"] = true;
         G2L["e"]["Text"] = [[Authentication]];
         G2L["e"]["AutomaticSize"] = Enum.AutomaticSize.XY;
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.Frame.Frame.TextLabel
-        G2L["f"] = Instance.new("TextLabel", G2L["6"]);
+        
+        G2L["f"] = Instancen("TextLabel", G2L["6"]);
         G2L["f"]["TextWrapped"] = true;
         G2L["f"]["BorderSizePixel"] = 0;
         G2L["f"]["TextSize"] = 18;
         G2L["f"]["TextXAlignment"] = Enum.TextXAlignment.Left;
         G2L["f"]["TextTransparency"] = 0.2;
-        G2L["f"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+        G2L["f"]["BackgroundColor3"] = fromRGB(255, 255, 255);
         G2L["f"]["FontFace"] = Font.new([[rbxassetid://12187365364]], Enum.FontWeight.Medium, Enum.FontStyle.Normal);
-        G2L["f"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+        G2L["f"]["TextColor3"] = fromRGB(255, 255, 255);
         G2L["f"]["BackgroundTransparency"] = 1;
         G2L["f"]["RichText"] = true;
-        G2L["f"]["Size"] = UDim2.new(1, 0, 0, 0);
-        G2L["f"]["Text"] = [[We are very <font color="rgb(0, 255, 135)">s</font><font color="rgb(19, 251, 159)">o</font><font color="rgb(38, 248, 183)">r</font><font color="rgb(57, 245, 207)">r</font><font color="rgb(76, 242, 231)">y</font>, to have this auth or key system but this means a lot to us, this is where you support our project.
-        ]];
+        G2L["f"]["Size"] = Dim2(1, 0, 0, 0);
+        G2L["f"]["Text"] = 'We are very <font color="rgb(0, 255, 135)">s</font><font color="rgb(19, 251, 159)">o</font><font color="rgb(38, 248, 183)">r</font><font color="rgb(57, 245, 207)">r</font><font color="rgb(76, 242, 231)">y</font>, to have this auth or key system but this means a lot to us, this is where you support our project';
         G2L["f"]["AutomaticSize"] = Enum.AutomaticSize.Y;
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.Frame.Frame.Frame
-        G2L["10"] = Instance.new("Frame", G2L["6"]);
+        
+        G2L["10"] = Instancen("Frame", G2L["6"]);
         G2L["10"]["BorderSizePixel"] = 0;
-        G2L["10"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-        G2L["10"]["Size"] = UDim2.new(1, 0, 0, 42);
+        G2L["10"]["BackgroundColor3"] = fromRGB(255, 255, 255);
+        G2L["10"]["Size"] = Dim2(1, 0, 0, 42);
         G2L["10"]["BackgroundTransparency"] = 1;
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.Frame.Frame.Frame.UIListLayout
-        G2L["11"] = Instance.new("UIListLayout", G2L["10"]);
+    
+    
+        
+        G2L["11"] = Instancen("UIListLayout", G2L["10"]);
         G2L["11"]["HorizontalAlignment"] = Enum.HorizontalAlignment.Right;
-        G2L["11"]["Padding"] = UDim.new(0, 9);
+        G2L["11"]["Padding"] = Dim(0, 9);
         G2L["11"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
         G2L["11"]["FillDirection"] = Enum.FillDirection.Horizontal;
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.Frame.Frame.Frame.TextButton
-        G2L["12"] = Instance.new("TextButton", G2L["10"]);
+    
+    
+        
+        G2L["12"] = Instancen("TextButton", G2L["10"]);
         G2L["12"]["BorderSizePixel"] = 0;
-        G2L["12"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+        G2L["12"]["TextColor3"] = fromRGB(255, 255, 255);
         G2L["12"]["AutoButtonColor"] = false;
         G2L["12"]["TextSize"] = 14;
-        G2L["12"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+        G2L["12"]["BackgroundColor3"] = fromRGB(255, 255, 255);
         G2L["12"]["AutomaticSize"] = Enum.AutomaticSize.X;
-        G2L["12"]["Size"] = UDim2.new(0, 0, 1, 0);
+        G2L["12"]["Size"] = Dim2(0, 0, 1, 0);
         G2L["12"]["BackgroundTransparency"] = 1;
         G2L["12"]["LayoutOrder"] = 2;
         G2L["12"]["Text"] = [[]];
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.Frame.Frame.Frame.TextButton.Squircle
-        G2L["13"] = Instance.new("ImageLabel", G2L["12"]);
+    
+    
+        
+        G2L["13"] = Instancen("ImageLabel", G2L["12"]);
         G2L["13"]["BorderSizePixel"] = 0;
-        G2L["13"]["SliceCenter"] = Rect.new(256, 256, 256, 256);
+        G2L["13"]["SliceCenter"] = Rectn(256, 256, 256, 256);
         G2L["13"]["SliceScale"] = 0.03906;
-        G2L["13"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+        G2L["13"]["BackgroundColor3"] = fromRGB(255, 255, 255);
         G2L["13"]["ScaleType"] = Enum.ScaleType.Slice;
         G2L["13"]["ImageTransparency"] = 1;
-        G2L["13"]["ImageColor3"] = Color3.fromRGB(83, 83, 92);
+        G2L["13"]["ImageColor3"] = fromRGB(83, 83, 92);
         G2L["13"]["Image"] = [[rbxassetid://80999662900595]];
-        G2L["13"]["Size"] = UDim2.new(1, 0, 1, 0);
+        G2L["13"]["Size"] = Dim2(1, 0, 1, 0);
         G2L["13"]["BackgroundTransparency"] = 1;
         G2L["13"]["Name"] = [[Squircle]];
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.Frame.Frame.Frame.TextButton.Special
-        G2L["14"] = Instance.new("ImageLabel", G2L["12"]);
+    
+    
+        
+        G2L["14"] = Instancen("ImageLabel", G2L["12"]);
         G2L["14"]["BorderSizePixel"] = 0;
-        G2L["14"]["SliceCenter"] = Rect.new(256, 256, 256, 256);
+        G2L["14"]["SliceCenter"] = Rectn(256, 256, 256, 256);
         G2L["14"]["SliceScale"] = 0.03906;
-        G2L["14"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+        G2L["14"]["BackgroundColor3"] = fromRGB(255, 255, 255);
         G2L["14"]["ScaleType"] = Enum.ScaleType.Slice;
         G2L["14"]["ImageTransparency"] = 0.95;
         G2L["14"]["Image"] = [[rbxassetid://80999662900595]];
-        G2L["14"]["Size"] = UDim2.new(1, 0, 1, 0);
+        G2L["14"]["Size"] = Dim2(1, 0, 1, 0);
         G2L["14"]["BackgroundTransparency"] = 1;
         G2L["14"]["Name"] = [[Special]];
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.Frame.Frame.Frame.TextButton.Shadow
-        G2L["15"] = Instance.new("ImageLabel", G2L["12"]);
+    
+    
+        
+        G2L["15"] = Instancen("ImageLabel", G2L["12"]);
         G2L["15"]["BorderSizePixel"] = 0;
-        G2L["15"]["SliceCenter"] = Rect.new(512, 512, 512, 512);
+        G2L["15"]["SliceCenter"] = Rectn(512, 512, 512, 512);
         G2L["15"]["SliceScale"] = 0.01953;
-        G2L["15"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+        G2L["15"]["BackgroundColor3"] = fromRGB(255, 255, 255);
         G2L["15"]["ScaleType"] = Enum.ScaleType.Slice;
-        G2L["15"]["ImageColor3"] = Color3.fromRGB(0, 0, 0);
-        G2L["15"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
+        G2L["15"]["ImageColor3"] = fromRGB(0, 0, 0);
+        G2L["15"]["AnchorPoint"] = Vec2(0.5, 0.5);
         G2L["15"]["Image"] = [[rbxassetid://84825982946844]];
-        G2L["15"]["Size"] = UDim2.new(1, 3, 1, 3);
+        G2L["15"]["Size"] = Dim2(1, 3, 1, 3);
         G2L["15"]["BackgroundTransparency"] = 1;
         G2L["15"]["Name"] = [[Shadow]];
-        G2L["15"]["Position"] = UDim2.new(0.5, 0, 0.5, 0);
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.Frame.Frame.Frame.TextButton.ImageLabel
-        G2L["16"] = Instance.new("ImageLabel", G2L["12"]);
+        G2L["15"]["Position"] = Dim2(0.5, 0, 0.5, 0);
+    
+    
+        
+        G2L["16"] = Instancen("ImageLabel", G2L["12"]);
         G2L["16"]["BorderSizePixel"] = 0;
-        G2L["16"]["SliceCenter"] = Rect.new(256, 256, 256, 256);
+        G2L["16"]["SliceCenter"] = Rectn(256, 256, 256, 256);
         G2L["16"]["SliceScale"] = 0.03906;
-        G2L["16"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+        G2L["16"]["BackgroundColor3"] = fromRGB(255, 255, 255);
         G2L["16"]["ScaleType"] = Enum.ScaleType.Slice;
         G2L["16"]["ImageTransparency"] = 0.85;
         G2L["16"]["Image"] = [[rbxassetid://117788349049947]];
-        G2L["16"]["Size"] = UDim2.new(1, 0, 1, 0);
+        G2L["16"]["Size"] = Dim2(1, 0, 1, 0);
         G2L["16"]["BackgroundTransparency"] = 1;
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.Frame.Frame.Frame.TextButton.Frame
-        G2L["17"] = Instance.new("ImageLabel", G2L["12"]);
+    
+    
+        
+        G2L["17"] = Instancen("ImageLabel", G2L["12"]);
         G2L["17"]["BorderSizePixel"] = 0;
-        G2L["17"]["SliceCenter"] = Rect.new(256, 256, 256, 256);
+        G2L["17"]["SliceCenter"] = Rectn(256, 256, 256, 256);
         G2L["17"]["SliceScale"] = 0.03906;
-        G2L["17"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+        G2L["17"]["BackgroundColor3"] = fromRGB(255, 255, 255);
         G2L["17"]["ScaleType"] = Enum.ScaleType.Slice;
         G2L["17"]["ImageTransparency"] = 1;
         G2L["17"]["Image"] = [[rbxassetid://80999662900595]];
-        G2L["17"]["Size"] = UDim2.new(1, 0, 1, 0);
+        G2L["17"]["Size"] = Dim2(1, 0, 1, 0);
         G2L["17"]["BackgroundTransparency"] = 1;
         G2L["17"]["Name"] = [[Frame]];
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.Frame.Frame.Frame.TextButton.Frame.UIPadding
-        G2L["18"] = Instance.new("UIPadding", G2L["17"]);
-        G2L["18"]["PaddingRight"] = UDim.new(0, 12);
-        G2L["18"]["PaddingLeft"] = UDim.new(0, 12);
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.Frame.Frame.Frame.TextButton.Frame.UIListLayout
-        G2L["19"] = Instance.new("UIListLayout", G2L["17"]);
+    
+    
+        
+        G2L["18"] = Instancen("UIPadding", G2L["17"]);
+        G2L["18"]["PaddingRight"] = Dim(0, 12);
+        G2L["18"]["PaddingLeft"] = Dim(0, 12);
+    
+    
+        
+        G2L["19"] = Instancen("UIListLayout", G2L["17"]);
         G2L["19"]["HorizontalAlignment"] = Enum.HorizontalAlignment.Center;
-        G2L["19"]["Padding"] = UDim.new(0, 8);
+        G2L["19"]["Padding"] = Dim(0, 8);
         G2L["19"]["VerticalAlignment"] = Enum.VerticalAlignment.Center;
         G2L["19"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
         G2L["19"]["FillDirection"] = Enum.FillDirection.Horizontal;
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.Frame.Frame.Frame.TextButton.Frame.TextLabel
-        G2L["1a"] = Instance.new("TextLabel", G2L["17"]);
+    
+    
+        
+        G2L["1a"] = Instancen("TextLabel", G2L["17"]);
         G2L["1a"]["BorderSizePixel"] = 0;
         G2L["1a"]["TextSize"] = 18;
-        G2L["1a"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+        G2L["1a"]["BackgroundColor3"] = fromRGB(255, 255, 255);
         G2L["1a"]["FontFace"] = Font.new([[rbxassetid://12187365364]], Enum.FontWeight.SemiBold, Enum.FontStyle.Normal);
-        G2L["1a"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+        G2L["1a"]["TextColor3"] = fromRGB(255, 255, 255);
         G2L["1a"]["BackgroundTransparency"] = 1;
         G2L["1a"]["RichText"] = true;
         G2L["1a"]["Text"] = [[Cancel]];
         G2L["1a"]["AutomaticSize"] = Enum.AutomaticSize.XY;
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.Frame.Frame.Frame.TextButton
-        G2L["1b"] = Instance.new("TextButton", G2L["10"]);
+    
+    
+        
+        G2L["1b"] = Instancen("TextButton", G2L["10"]);
         G2L["1b"]["BorderSizePixel"] = 0;
-        G2L["1b"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+        G2L["1b"]["TextColor3"] = fromRGB(255, 255, 255);
         G2L["1b"]["AutoButtonColor"] = false;
         G2L["1b"]["TextSize"] = 14;
-        G2L["1b"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+        G2L["1b"]["BackgroundColor3"] = fromRGB(255, 255, 255);
         G2L["1b"]["AutomaticSize"] = Enum.AutomaticSize.X;
-        G2L["1b"]["Size"] = UDim2.new(0, 0, 1, 0);
+        G2L["1b"]["Size"] = Dim2(0, 0, 1, 0);
         G2L["1b"]["BackgroundTransparency"] = 1;
         G2L["1b"]["LayoutOrder"] = 3;
         G2L["1b"]["Text"] = [[]];
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.Frame.Frame.Frame.TextButton.Squircle
-        G2L["1c"] = Instance.new("ImageLabel", G2L["1b"]);
+    
+    
+        
+        G2L["1c"] = Instancen("ImageLabel", G2L["1b"]);
         G2L["1c"]["BorderSizePixel"] = 0;
-        G2L["1c"]["SliceCenter"] = Rect.new(256, 256, 256, 256);
+        G2L["1c"]["SliceCenter"] = Rectn(256, 256, 256, 256);
         G2L["1c"]["SliceScale"] = 0.03906;
-        G2L["1c"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+        G2L["1c"]["BackgroundColor3"] = fromRGB(255, 255, 255);
         G2L["1c"]["ScaleType"] = Enum.ScaleType.Slice;
-        G2L["1c"]["ImageColor3"] = Color3.fromRGB(83, 83, 92);
+        G2L["1c"]["ImageColor3"] = fromRGB(83, 83, 92);
         G2L["1c"]["Image"] = [[rbxassetid://80999662900595]];
-        G2L["1c"]["Size"] = UDim2.new(1, 0, 1, 0);
+        G2L["1c"]["Size"] = Dim2(1, 0, 1, 0);
         G2L["1c"]["BackgroundTransparency"] = 1;
         G2L["1c"]["Name"] = [[Squircle]];
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.Frame.Frame.Frame.TextButton.Special
-        G2L["1d"] = Instance.new("ImageLabel", G2L["1b"]);
+    
+    
+        
+        G2L["1d"] = Instancen("ImageLabel", G2L["1b"]);
         G2L["1d"]["BorderSizePixel"] = 0;
-        G2L["1d"]["SliceCenter"] = Rect.new(256, 256, 256, 256);
+        G2L["1d"]["SliceCenter"] = Rectn(256, 256, 256, 256);
         G2L["1d"]["SliceScale"] = 0.03906;
-        G2L["1d"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+        G2L["1d"]["BackgroundColor3"] = fromRGB(255, 255, 255);
         G2L["1d"]["ScaleType"] = Enum.ScaleType.Slice;
         G2L["1d"]["ImageTransparency"] = 1;
         G2L["1d"]["Image"] = [[rbxassetid://80999662900595]];
-        G2L["1d"]["Size"] = UDim2.new(1, 0, 1, 0);
+        G2L["1d"]["Size"] = Dim2(1, 0, 1, 0);
         G2L["1d"]["BackgroundTransparency"] = 1;
         G2L["1d"]["Name"] = [[Special]];
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.Frame.Frame.Frame.TextButton.Shadow
-        G2L["1e"] = Instance.new("ImageLabel", G2L["1b"]);
+    
+    
+        
+        G2L["1e"] = Instancen("ImageLabel", G2L["1b"]);
         G2L["1e"]["BorderSizePixel"] = 0;
-        G2L["1e"]["SliceCenter"] = Rect.new(512, 512, 512, 512);
+        G2L["1e"]["SliceCenter"] = Rectn(512, 512, 512, 512);
         G2L["1e"]["SliceScale"] = 0.01953;
-        G2L["1e"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+        G2L["1e"]["BackgroundColor3"] = fromRGB(255, 255, 255);
         G2L["1e"]["ScaleType"] = Enum.ScaleType.Slice;
         G2L["1e"]["ImageTransparency"] = 1;
-        G2L["1e"]["ImageColor3"] = Color3.fromRGB(0, 0, 0);
-        G2L["1e"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
+        G2L["1e"]["ImageColor3"] = fromRGB(0, 0, 0);
+        G2L["1e"]["AnchorPoint"] = Vec2(0.5, 0.5);
         G2L["1e"]["Image"] = [[rbxassetid://84825982946844]];
-        G2L["1e"]["Size"] = UDim2.new(1, 3, 1, 3);
+        G2L["1e"]["Size"] = Dim2(1, 3, 1, 3);
         G2L["1e"]["BackgroundTransparency"] = 1;
         G2L["1e"]["Name"] = [[Shadow]];
-        G2L["1e"]["Position"] = UDim2.new(0.5, 0, 0.5, 0);
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.Frame.Frame.Frame.TextButton.ImageLabel
-        G2L["1f"] = Instance.new("ImageLabel", G2L["1b"]);
+        G2L["1e"]["Position"] = Dim2(0.5, 0, 0.5, 0);
+    
+    
+        
+        G2L["1f"] = Instancen("ImageLabel", G2L["1b"]);
         G2L["1f"]["BorderSizePixel"] = 0;
-        G2L["1f"]["SliceCenter"] = Rect.new(256, 256, 256, 256);
+        G2L["1f"]["SliceCenter"] = Rectn(256, 256, 256, 256);
         G2L["1f"]["SliceScale"] = 0.03906;
-        G2L["1f"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+        G2L["1f"]["BackgroundColor3"] = fromRGB(255, 255, 255);
         G2L["1f"]["ScaleType"] = Enum.ScaleType.Slice;
         G2L["1f"]["ImageTransparency"] = 0.95;
         G2L["1f"]["Image"] = [[rbxassetid://117788349049947]];
-        G2L["1f"]["Size"] = UDim2.new(1, 0, 1, 0);
+        G2L["1f"]["Size"] = Dim2(1, 0, 1, 0);
         G2L["1f"]["BackgroundTransparency"] = 1;
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.Frame.Frame.Frame.TextButton.Frame
-        G2L["20"] = Instance.new("ImageLabel", G2L["1b"]);
+    
+    
+        
+        G2L["20"] = Instancen("ImageLabel", G2L["1b"]);
         G2L["20"]["BorderSizePixel"] = 0;
-        G2L["20"]["SliceCenter"] = Rect.new(256, 256, 256, 256);
+        G2L["20"]["SliceCenter"] = Rectn(256, 256, 256, 256);
         G2L["20"]["SliceScale"] = 0.03906;
-        G2L["20"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+        G2L["20"]["BackgroundColor3"] = fromRGB(255, 255, 255);
         G2L["20"]["ScaleType"] = Enum.ScaleType.Slice;
         G2L["20"]["ImageTransparency"] = 1;
         G2L["20"]["Image"] = [[rbxassetid://80999662900595]];
-        G2L["20"]["Size"] = UDim2.new(1, 0, 1, 0);
+        G2L["20"]["Size"] = Dim2(1, 0, 1, 0);
         G2L["20"]["BackgroundTransparency"] = 1;
         G2L["20"]["Name"] = [[Frame]];
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.Frame.Frame.Frame.TextButton.Frame.UIPadding
-        G2L["21"] = Instance.new("UIPadding", G2L["20"]);
-        G2L["21"]["PaddingRight"] = UDim.new(0, 12);
-        G2L["21"]["PaddingLeft"] = UDim.new(0, 12);
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.Frame.Frame.Frame.TextButton.Frame.UIListLayout
-        G2L["22"] = Instance.new("UIListLayout", G2L["20"]);
+    
+    
+        
+        G2L["21"] = Instancen("UIPadding", G2L["20"]);
+        G2L["21"]["PaddingRight"] = Dim(0, 12);
+        G2L["21"]["PaddingLeft"] = Dim(0, 12);
+    
+    
+        
+        G2L["22"] = Instancen("UIListLayout", G2L["20"]);
         G2L["22"]["HorizontalAlignment"] = Enum.HorizontalAlignment.Center;
-        G2L["22"]["Padding"] = UDim.new(0, 8);
+        G2L["22"]["Padding"] = Dim(0, 8);
         G2L["22"]["VerticalAlignment"] = Enum.VerticalAlignment.Center;
         G2L["22"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
         G2L["22"]["FillDirection"] = Enum.FillDirection.Horizontal;
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.Frame.Frame.Frame.TextButton.Frame.ImageLabel
-        G2L["23"] = Instance.new("ImageLabel", G2L["20"]);
+    
+    
+        
+        G2L["23"] = Instancen("ImageLabel", G2L["20"]);
         G2L["23"]["BorderSizePixel"] = 0;
-        G2L["23"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-        G2L["23"]["ImageColor3"] = Color3.fromRGB(162, 162, 171);
+        G2L["23"]["BackgroundColor3"] = fromRGB(255, 255, 255);
+        G2L["23"]["ImageColor3"] = fromRGB(162, 162, 171);
         G2L["23"]["Image"] = [[rbxassetid://131526378523863]];
-        G2L["23"]["ImageRectSize"] = Vector2.new(96, 96);
-        G2L["23"]["Size"] = UDim2.new(0, 21, 0, 21);
+        G2L["23"]["ImageRectSize"] = Vec2(96, 96);
+        G2L["23"]["Size"] = Dim2(0, 21, 0, 21);
         G2L["23"]["BackgroundTransparency"] = 1;
-        G2L["23"]["ImageRectOffset"] = Vector2.new(480, 768);
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.Frame.Frame.Frame.TextButton.Frame.TextLabel
-        G2L["24"] = Instance.new("TextLabel", G2L["20"]);
+        G2L["23"]["ImageRectOffset"] = Vec2(480, 768);
+    
+    
+        
+        G2L["24"] = Instancen("TextLabel", G2L["20"]);
         G2L["24"]["BorderSizePixel"] = 0;
         G2L["24"]["TextSize"] = 18;
-        G2L["24"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+        G2L["24"]["BackgroundColor3"] = fromRGB(255, 255, 255);
         G2L["24"]["FontFace"] = Font.new([[rbxassetid://12187365364]], Enum.FontWeight.SemiBold, Enum.FontStyle.Normal);
-        G2L["24"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+        G2L["24"]["TextColor3"] = fromRGB(255, 255, 255);
         G2L["24"]["BackgroundTransparency"] = 1;
         G2L["24"]["RichText"] = true;
         G2L["24"]["Text"] = [[Continue]];
         G2L["24"]["AutomaticSize"] = Enum.AutomaticSize.XY;
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.Frame.Frame.Frame.TextBox
-        G2L["25"] = Instance.new("TextBox", G2L["10"]);
+    
+    
+        
+        G2L["25"] = Instancen("TextBox", G2L["10"]);
         G2L["25"]["BorderSizePixel"] = 0;
         G2L["25"]["TextSize"] = 14;
-        G2L["25"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
-        G2L["25"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+        G2L["25"]["TextColor3"] = fromRGB(255, 255, 255);
+        G2L["25"]["BackgroundColor3"] = fromRGB(255, 255, 255);
         G2L["25"]["FontFace"] = Font.new([[rbxassetid://12187365364]], Enum.FontWeight.SemiBold, Enum.FontStyle.Normal);
         G2L["25"]["ClipsDescendants"] = true;
         G2L["25"]["PlaceholderText"] = [[Enter Key...]];
-        G2L["25"]["Size"] = UDim2.new(0.17, 0, 1, 0);
-        G2L["25"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+        G2L["25"]["Size"] = Dim2(0.17, 0, 1, 0);
+        G2L["25"]["BorderColor3"] = fromRGB(0, 0, 0);
         G2L["25"]["Text"] = [[]];
         G2L["25"]["BackgroundTransparency"] = 1;
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.Frame.Frame.Frame.TextBox.Frame
-        G2L["26"] = Instance.new("ImageLabel", G2L["25"]);
+    
+    
+        
+        G2L["26"] = Instancen("ImageLabel", G2L["25"]);
         G2L["26"]["BorderSizePixel"] = 0;
-        G2L["26"]["SliceCenter"] = Rect.new(256, 256, 256, 256);
+        G2L["26"]["SliceCenter"] = Rectn(256, 256, 256, 256);
         G2L["26"]["SliceScale"] = 0.03906;
-        G2L["26"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+        G2L["26"]["BackgroundColor3"] = fromRGB(255, 255, 255);
         G2L["26"]["ScaleType"] = Enum.ScaleType.Slice;
         G2L["26"]["ImageTransparency"] = 1;
         G2L["26"]["Image"] = [[rbxassetid://80999662900595]];
-        G2L["26"]["Size"] = UDim2.new(1, 0, 1, 0);
+        G2L["26"]["Size"] = Dim2(1, 0, 1, 0);
         G2L["26"]["BackgroundTransparency"] = 1;
         G2L["26"]["Name"] = [[Frame]];
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.Frame.Frame.Frame.TextBox.ImageLabel
-        G2L["27"] = Instance.new("ImageLabel", G2L["25"]);
+    
+    
+        
+        G2L["27"] = Instancen("ImageLabel", G2L["25"]);
         G2L["27"]["BorderSizePixel"] = 0;
-        G2L["27"]["SliceCenter"] = Rect.new(256, 256, 256, 256);
+        G2L["27"]["SliceCenter"] = Rectn(256, 256, 256, 256);
         G2L["27"]["SliceScale"] = 0.03906;
-        G2L["27"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+        G2L["27"]["BackgroundColor3"] = fromRGB(255, 255, 255);
         G2L["27"]["ScaleType"] = Enum.ScaleType.Slice;
         G2L["27"]["ImageTransparency"] = 0.85;
         G2L["27"]["Image"] = [[rbxassetid://117788349049947]];
-        G2L["27"]["Size"] = UDim2.new(1, 0, 1, 0);
+        G2L["27"]["Size"] = Dim2(1, 0, 1, 0);
         G2L["27"]["BackgroundTransparency"] = 1;
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.Frame.Frame.Frame.TextBox.Shadow
-        G2L["28"] = Instance.new("ImageLabel", G2L["25"]);
+    
+    
+        
+        G2L["28"] = Instancen("ImageLabel", G2L["25"]);
         G2L["28"]["BorderSizePixel"] = 0;
-        G2L["28"]["SliceCenter"] = Rect.new(512, 512, 512, 512);
+        G2L["28"]["SliceCenter"] = Rectn(512, 512, 512, 512);
         G2L["28"]["SliceScale"] = 0.01953;
-        G2L["28"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+        G2L["28"]["BackgroundColor3"] = fromRGB(255, 255, 255);
         G2L["28"]["ScaleType"] = Enum.ScaleType.Slice;
-        G2L["28"]["ImageColor3"] = Color3.fromRGB(0, 0, 0);
-        G2L["28"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
+        G2L["28"]["ImageColor3"] = fromRGB(0, 0, 0);
+        G2L["28"]["AnchorPoint"] = Vec2(0.5, 0.5);
         G2L["28"]["Image"] = [[rbxassetid://84825982946844]];
-        G2L["28"]["Size"] = UDim2.new(1, 3, 1, 3);
+        G2L["28"]["Size"] = Dim2(1, 3, 1, 3);
         G2L["28"]["BackgroundTransparency"] = 1;
         G2L["28"]["Name"] = [[Shadow]];
-        G2L["28"]["Position"] = UDim2.new(0.5, 0, 0.5, 0);
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.Frame.Frame.Frame.TextBox.Special
-        G2L["29"] = Instance.new("ImageLabel", G2L["25"]);
+        G2L["28"]["Position"] = Dim2(0.5, 0, 0.5, 0);
+    
+    
+        
+        G2L["29"] = Instancen("ImageLabel", G2L["25"]);
         G2L["29"]["BorderSizePixel"] = 0;
-        G2L["29"]["SliceCenter"] = Rect.new(256, 256, 256, 256);
+        G2L["29"]["SliceCenter"] = Rectn(256, 256, 256, 256);
         G2L["29"]["SliceScale"] = 0.03906;
-        G2L["29"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+        G2L["29"]["BackgroundColor3"] = fromRGB(255, 255, 255);
         G2L["29"]["ScaleType"] = Enum.ScaleType.Slice;
         G2L["29"]["ImageTransparency"] = 0.95;
         G2L["29"]["Image"] = [[rbxassetid://80999662900595]];
-        G2L["29"]["Size"] = UDim2.new(1, 0, 1, 0);
+        G2L["29"]["Size"] = Dim2(1, 0, 1, 0);
         G2L["29"]["BackgroundTransparency"] = 1;
         G2L["29"]["Name"] = [[Special]];
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.Frame.Frame.Frame.TextBox.Squircle
-        G2L["2a"] = Instance.new("ImageLabel", G2L["25"]);
+    
+    
+        
+        G2L["2a"] = Instancen("ImageLabel", G2L["25"]);
         G2L["2a"]["BorderSizePixel"] = 0;
-        G2L["2a"]["SliceCenter"] = Rect.new(256, 256, 256, 256);
+        G2L["2a"]["SliceCenter"] = Rectn(256, 256, 256, 256);
         G2L["2a"]["SliceScale"] = 0.03906;
-        G2L["2a"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+        G2L["2a"]["BackgroundColor3"] = fromRGB(255, 255, 255);
         G2L["2a"]["ScaleType"] = Enum.ScaleType.Slice;
         G2L["2a"]["ImageTransparency"] = 1;
-        G2L["2a"]["ImageColor3"] = Color3.fromRGB(83, 83, 92);
+        G2L["2a"]["ImageColor3"] = fromRGB(83, 83, 92);
         G2L["2a"]["Image"] = [[rbxassetid://80999662900595]];
-        G2L["2a"]["Size"] = UDim2.new(1, 0, 1, 0);
+        G2L["2a"]["Size"] = Dim2(1, 0, 1, 0);
         G2L["2a"]["BackgroundTransparency"] = 1;
         G2L["2a"]["Name"] = [[Squircle]];
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.Frame.Frame.Frame.TextButton
-        G2L["2b"] = Instance.new("TextButton", G2L["10"]);
+    
+    
+        
+        G2L["2b"] = Instancen("TextButton", G2L["10"]);
         G2L["2b"]["BorderSizePixel"] = 0;
-        G2L["2b"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+        G2L["2b"]["TextColor3"] = fromRGB(255, 255, 255);
         G2L["2b"]["AutoButtonColor"] = false;
         G2L["2b"]["TextSize"] = 14;
-        G2L["2b"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+        G2L["2b"]["BackgroundColor3"] = fromRGB(255, 255, 255);
         G2L["2b"]["AutomaticSize"] = Enum.AutomaticSize.X;
-        G2L["2b"]["Size"] = UDim2.new(0, 0, 1, 0);
+        G2L["2b"]["Size"] = Dim2(0, 0, 1, 0);
         G2L["2b"]["BackgroundTransparency"] = 1;
         G2L["2b"]["LayoutOrder"] = 1;
         G2L["2b"]["Text"] = [[]];
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.Frame.Frame.Frame.TextButton.Squircle
-        G2L["2c"] = Instance.new("ImageLabel", G2L["2b"]);
+    
+    
+        
+        G2L["2c"] = Instancen("ImageLabel", G2L["2b"]);
         G2L["2c"]["BorderSizePixel"] = 0;
-        G2L["2c"]["SliceCenter"] = Rect.new(256, 256, 256, 256);
+        G2L["2c"]["SliceCenter"] = Rectn(256, 256, 256, 256);
         G2L["2c"]["SliceScale"] = 0.03906;
-        G2L["2c"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+        G2L["2c"]["BackgroundColor3"] = fromRGB(255, 255, 255);
         G2L["2c"]["ScaleType"] = Enum.ScaleType.Slice;
         G2L["2c"]["ImageTransparency"] = 1;
-        G2L["2c"]["ImageColor3"] = Color3.fromRGB(83, 83, 92);
+        G2L["2c"]["ImageColor3"] = fromRGB(83, 83, 92);
         G2L["2c"]["Image"] = [[rbxassetid://80999662900595]];
-        G2L["2c"]["Size"] = UDim2.new(1, 0, 1, 0);
+        G2L["2c"]["Size"] = Dim2(1, 0, 1, 0);
         G2L["2c"]["BackgroundTransparency"] = 1;
         G2L["2c"]["Name"] = [[Squircle]];
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.Frame.Frame.Frame.TextButton.Special
-        G2L["2d"] = Instance.new("ImageLabel", G2L["2b"]);
+    
+    
+        
+        G2L["2d"] = Instancen("ImageLabel", G2L["2b"]);
         G2L["2d"]["BorderSizePixel"] = 0;
-        G2L["2d"]["SliceCenter"] = Rect.new(256, 256, 256, 256);
+        G2L["2d"]["SliceCenter"] = Rectn(256, 256, 256, 256);
         G2L["2d"]["SliceScale"] = 0.03906;
-        G2L["2d"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+        G2L["2d"]["BackgroundColor3"] = fromRGB(255, 255, 255);
         G2L["2d"]["ScaleType"] = Enum.ScaleType.Slice;
         G2L["2d"]["ImageTransparency"] = 0.95;
         G2L["2d"]["Image"] = [[rbxassetid://80999662900595]];
-        G2L["2d"]["Size"] = UDim2.new(1, 0, 1, 0);
+        G2L["2d"]["Size"] = Dim2(1, 0, 1, 0);
         G2L["2d"]["BackgroundTransparency"] = 1;
         G2L["2d"]["Name"] = [[Special]];
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.Frame.Frame.Frame.TextButton.Shadow
-        G2L["2e"] = Instance.new("ImageLabel", G2L["2b"]);
+    
+    
+        
+        G2L["2e"] = Instancen("ImageLabel", G2L["2b"]);
         G2L["2e"]["BorderSizePixel"] = 0;
-        G2L["2e"]["SliceCenter"] = Rect.new(512, 512, 512, 512);
+        G2L["2e"]["SliceCenter"] = Rectn(512, 512, 512, 512);
         G2L["2e"]["SliceScale"] = 0.01953;
-        G2L["2e"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+        G2L["2e"]["BackgroundColor3"] = fromRGB(255, 255, 255);
         G2L["2e"]["ScaleType"] = Enum.ScaleType.Slice;
-        G2L["2e"]["ImageColor3"] = Color3.fromRGB(0, 0, 0);
-        G2L["2e"]["AnchorPoint"] = Vector2.new(0.5, 0.5);
+        G2L["2e"]["ImageColor3"] = fromRGB(0, 0, 0);
+        G2L["2e"]["AnchorPoint"] = Vec2(0.5, 0.5);
         G2L["2e"]["Image"] = [[rbxassetid://84825982946844]];
-        G2L["2e"]["Size"] = UDim2.new(1, 3, 1, 3);
+        G2L["2e"]["Size"] = Dim2(1, 3, 1, 3);
         G2L["2e"]["BackgroundTransparency"] = 1;
         G2L["2e"]["Name"] = [[Shadow]];
-        G2L["2e"]["Position"] = UDim2.new(0.5, 0, 0.5, 0);
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.Frame.Frame.Frame.TextButton.ImageLabel
-        G2L["2f"] = Instance.new("ImageLabel", G2L["2b"]);
+        G2L["2e"]["Position"] = Dim2(0.5, 0, 0.5, 0);
+    
+    
+        
+        G2L["2f"] = Instancen("ImageLabel", G2L["2b"]);
         G2L["2f"]["BorderSizePixel"] = 0;
-        G2L["2f"]["SliceCenter"] = Rect.new(256, 256, 256, 256);
+        G2L["2f"]["SliceCenter"] = Rectn(256, 256, 256, 256);
         G2L["2f"]["SliceScale"] = 0.03906;
-        G2L["2f"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+        G2L["2f"]["BackgroundColor3"] = fromRGB(255, 255, 255);
         G2L["2f"]["ScaleType"] = Enum.ScaleType.Slice;
         G2L["2f"]["ImageTransparency"] = 0.85;
         G2L["2f"]["Image"] = [[rbxassetid://117788349049947]];
-        G2L["2f"]["Size"] = UDim2.new(1, 0, 1, 0);
+        G2L["2f"]["Size"] = Dim2(1, 0, 1, 0);
         G2L["2f"]["BackgroundTransparency"] = 1;
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.Frame.Frame.Frame.TextButton.Frame
-        G2L["30"] = Instance.new("ImageLabel", G2L["2b"]);
+    
+    
+        
+        G2L["30"] = Instancen("ImageLabel", G2L["2b"]);
         G2L["30"]["BorderSizePixel"] = 0;
-        G2L["30"]["SliceCenter"] = Rect.new(256, 256, 256, 256);
+        G2L["30"]["SliceCenter"] = Rectn(256, 256, 256, 256);
         G2L["30"]["SliceScale"] = 0.03906;
-        G2L["30"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+        G2L["30"]["BackgroundColor3"] = fromRGB(255, 255, 255);
         G2L["30"]["ScaleType"] = Enum.ScaleType.Slice;
         G2L["30"]["ImageTransparency"] = 1;
         G2L["30"]["Image"] = [[rbxassetid://80999662900595]];
-        G2L["30"]["Size"] = UDim2.new(1, 0, 1, 0);
+        G2L["30"]["Size"] = Dim2(1, 0, 1, 0);
         G2L["30"]["BackgroundTransparency"] = 1;
         G2L["30"]["Name"] = [[Frame]];
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.Frame.Frame.Frame.TextButton.Frame.UIPadding
-        G2L["31"] = Instance.new("UIPadding", G2L["30"]);
-        G2L["31"]["PaddingRight"] = UDim.new(0, 12);
-        G2L["31"]["PaddingLeft"] = UDim.new(0, 12);
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.Frame.Frame.Frame.TextButton.Frame.UIListLayout
-        G2L["32"] = Instance.new("UIListLayout", G2L["30"]);
+    
+    
+        
+        G2L["31"] = Instancen("UIPadding", G2L["30"]);
+        G2L["31"]["PaddingRight"] = Dim(0, 12);
+        G2L["31"]["PaddingLeft"] = Dim(0, 12);
+    
+    
+        
+        G2L["32"] = Instancen("UIListLayout", G2L["30"]);
         G2L["32"]["HorizontalAlignment"] = Enum.HorizontalAlignment.Center;
-        G2L["32"]["Padding"] = UDim.new(0, 8);
+        G2L["32"]["Padding"] = Dim(0, 8);
         G2L["32"]["VerticalAlignment"] = Enum.VerticalAlignment.Center;
         G2L["32"]["SortOrder"] = Enum.SortOrder.LayoutOrder;
         G2L["32"]["FillDirection"] = Enum.FillDirection.Horizontal;
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.Frame.Frame.Frame.TextButton.Frame.TextLabel
-        G2L["33"] = Instance.new("TextLabel", G2L["30"]);
+    
+    
+        
+        G2L["33"] = Instancen("TextLabel", G2L["30"]);
         G2L["33"]["BorderSizePixel"] = 0;
         G2L["33"]["TextSize"] = 18;
-        G2L["33"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+        G2L["33"]["BackgroundColor3"] = fromRGB(255, 255, 255);
         G2L["33"]["FontFace"] = Font.new([[rbxassetid://12187365364]], Enum.FontWeight.SemiBold, Enum.FontStyle.Normal);
-        G2L["33"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+        G2L["33"]["TextColor3"] = fromRGB(255, 255, 255);
         G2L["33"]["BackgroundTransparency"] = 1;
         G2L["33"]["RichText"] = true;
         G2L["33"]["Text"] = [[Copy Link]];
         G2L["33"]["AutomaticSize"] = Enum.AutomaticSize.XY;
-
-
-        -- StarterGui.FlowAuth.ImageLabel.Frame.Frame.Frame.UIPadding
-        G2L["34"] = Instance.new("UIPadding", G2L["6"]);
-        G2L["34"]["PaddingTop"] = UDim.new(0, 16);
-        G2L["34"]["PaddingRight"] = UDim.new(0, 16);
-        G2L["34"]["PaddingLeft"] = UDim.new(0, 16);
-        G2L["34"]["PaddingBottom"] = UDim.new(0, 16);
-
-
-        -- StarterGui.FlowAuth.ImageLabel.UIScale
-        G2L["35"] = Instance.new("UIScale", G2L["2"]);
-
-
-
-        -- StarterGui.FlowAuth.ImageLabel.ImageLabel
-        G2L["36"] = Instance.new("ImageLabel", G2L["2"]);
+    
+    
+        
+        G2L["34"] = Instancen("UIPadding", G2L["6"]);
+        G2L["34"]["PaddingTop"] = Dim(0, 16);
+        G2L["34"]["PaddingRight"] = Dim(0, 16);
+        G2L["34"]["PaddingLeft"] = Dim(0, 16);
+        G2L["34"]["PaddingBottom"] = Dim(0, 16);
+    
+    
+        
+        G2L["35"] = Instancen("UIScale", G2L["2"]);
+    
+    
+    
+        
+        G2L["36"] = Instancen("ImageLabel", G2L["2"]);
         G2L["36"]["BorderSizePixel"] = 0;
-        G2L["36"]["SliceCenter"] = Rect.new(256, 256, 256, 256);
+        G2L["36"]["SliceCenter"] = Rectn(256, 256, 256, 256);
         G2L["36"]["SliceScale"] = 0.08594;
-        G2L["36"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+        G2L["36"]["BackgroundColor3"] = fromRGB(255, 255, 255);
         G2L["36"]["ScaleType"] = Enum.ScaleType.Slice;
         G2L["36"]["ImageTransparency"] = 0.9;
         G2L["36"]["Image"] = [[rbxassetid://117788349049947]];
-        G2L["36"]["Size"] = UDim2.new(1, 0, 1, 0);
+        G2L["36"]["Size"] = Dim2(1, 0, 1, 0);
         G2L["36"]["BackgroundTransparency"] = 1;
-
-
-        -- StarterGui.FlowAuth.ImageLabel.ImageLabel.UIGradient
-        G2L["37"] = Instance.new("UIGradient", G2L["36"]);
-        G2L["37"]["Rotation"] = 90;
-        G2L["37"]["Transparency"] = NumberSequence.new{NumberSequenceKeypoint.new(0.000, 0),NumberSequenceKeypoint.new(1.000, 1)};
         
-        function tbl:fade_in()
-
-        end;
-
+        G2L["37"] = Instancen("UIGradient", G2L["36"]);
+        G2L["37"]["Rotation"] = 90;
+        G2L["37"]["Transparency"] = NSnew{NSKnew(0.000, 0),NSKnew(1.000, 1)};
+    
         G2L["1b"].MouseButton1Click:Connect(function()
             return configu.Auth(G2L["25"].Text);
         end);
@@ -14128,8 +14092,61 @@ GG.UploadToGlobal_Key = GG.UploadToGlobal_Key or function( arg : {} )
             G2L = nil;
         end);
 
+        function modules:fadeAndTween(G2L, e)
+            local tweenInfo = TwInfo(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+            
+            for key, instance in pir(G2L) do
+                tspawn(function()
+                    if IsA(instance, "TextLabel") and instance.Text ~= "Authentication" then
+                        local tween = TweenService:Create(instance, tweenInfo, {TextTransparency = 1})
+                        instance.AutomaticSize = Enum.AutomaticSize.None;
+                        tween:Play()
+                        tween.Completed:Connect(function()
+                            instance.Visible = false;
+                        end);
+                    elseif IsA(instance, "Frame") then
+                        local size = instance.Size;
+                        local tween = TweenService:Create(instance, tweenInfo, {Size = UDim2.new(size.X.Scale, size.X.Offset, 0, 0)})
+                        instance.AutomaticSize = Enum.AutomaticSize.None;
+                        tween:Play();
+                        tween.Completed:Connect(function()
+                            Destroy(instance);
+                        end);
+                    end;
+                end);
+            end;
+
+            local DevMSG = {
+                {Text = "Project : Secure Sequence", Duration = 0.5},
+                {Text = "Script verified by Flow AI", Duration = 0.5},
+                {Text = "Script verfied by TTY's Bot", Duration = 0.5},
+                {Text = "Script made by TTJY", Duration = 0.5},
+                {Text = "Script made by Sevensenz7", Duration = 0.5},
+                {Text = "Thank you!", Duration = 0.5}
+            }
+
+            local function tweenText()
+                local textLabel = e;
+                local tweenInfoFadeOut = TwInfo(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out);
+                local tweenInfoFadeIn = TwInfo(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.In);
+
+                for _, msg in ipir(DevMSG) do
+                    local tweenOut = TweenService:Create(textLabel, tweenInfoFadeOut, {TextTransparency = 1});
+                    tweenOut:Play();
+                    tweenOut.Completed:Wait();
+
+                    textLabel.Text = msg.Text;
+                    local tweenIn = TweenService:Create(textLabel, tweenInfoFadeIn, {TextTransparency = 0});
+                    tweenIn:Play();
+                    twait(msg.Duration + 0.4);
+                end;
+            end;
+
+            tweenText();
+        end
+    
         return G2L, tbl;
-    end;
+    end;    
 
     return modules;
 end;
@@ -14321,6 +14338,12 @@ GG.WelcomeHandler = function(tab: WelcomeTab, wind: WindUI): any
     );
 end;
 
+------------- ThreadView / Script Cache 3 -------------
+
+if LoaderSettings.AllowThreadView then
+
+end;
+
 ------------- FlowXS -------------
 
 if LoaderSettings.AllowCache then
@@ -14341,8 +14364,8 @@ if not GG.ALLVersion then
         GG.ALLVersion = {["MagicCity"] = true};
     end;
 end;
-if ALLVersion["MainLoader"] == nil then
-    ALLVersion["MainLoader"] = tos(tick());
+if GG.ALLVersion["MainLoader"] == nil then
+    GG.ALLVersion["MainLoader"] = tos(tick());
 end;
 
 GG.ScriptStatus = "Finish Intializing API_M";
@@ -14356,6 +14379,6 @@ if GG.LSecureLoad and GG.LSecureUI and GG.Functions then
     return GG.LSecureLoad();
 else
     GG.ScriptStatus = "Intializing API_P";
-    local srcName : string = "https://raw.githubusercontent.com/Yumiara/Secure-Sequence/refs/heads/main/Main/API/API_P.lua";
+    local srcName : string = "https://raw.githubusercontent.com/Yumiara/Secure-Sequence/refs/heads/main/Main/API/API_K.lua";
     return loadScriptFromCache(srcName, "API_P", false, 600, true);
 end;
