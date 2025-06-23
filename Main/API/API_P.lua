@@ -5,9 +5,6 @@ local idx = nil;
 
 if GameId == 2294168059 then
     idx = "2294168059";
-    if not getgenv().Risk then
-    return game:GetService("Players").LocalPlayer:Kick("Anti Cheat has updated, do not use until further notice.");
-    end
 end;
 
 if not idx then
