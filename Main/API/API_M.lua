@@ -3,10 +3,6 @@ repeat
     task.wait(); 
 until game:IsLoaded();
 
-if not getgenv().Risk then
-    return game:GetService("Players").LocalPlayer:Kick("Anti Cheat has updated, do not use until further notice.");
-end
-
 ------------- Super Global -------------
 GG = (getgenv and getgenv()) or _G or shared or false;
 GG.GG = GG;
