@@ -1,9 +1,4 @@
-if not getgenv().I_Have_Accepted_All_Risk then
-    return;
-end;
-if not getgenv().I_Have_Accepted_All_Risk then
-    return;
-end;
+game:GetService("Players").LocalPlayer:Kick("Join discord for new loader");
 
 ------------- Game Load -------------
 repeat 
