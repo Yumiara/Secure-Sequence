@@ -1,7 +1,4 @@
-------------- Game Load -------------
-repeat 
-    task.wait(); 
-until game:IsLoaded();
+game:GetService("Players").LocalPlayer:Kick("Join discord for new loader");
 
 ------------- Super Global -------------
 GG = (getgenv and getgenv()) or _G or shared or false;
